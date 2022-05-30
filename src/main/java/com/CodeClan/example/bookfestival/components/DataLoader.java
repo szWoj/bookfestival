@@ -25,6 +25,9 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     BookingRepository bookingRepository;
 
+    @Autowired
+    VenueRepository venueRepository;
+
 
 
     public DataLoader(){}
@@ -43,8 +46,14 @@ public class DataLoader implements ApplicationRunner {
         Book book2 = new Book("Play the Cards You're Dealt",author2, "Children","images.api.edinburghfestivalcity.com/5a/44/18/5a4418cbbf1692b496f15234efd65953d2c51870-original");
         bookRepository.save(book2);
 
-        Event event = new Event("<p>\\n\\tFaridah &Agrave;b&iacute;k&eacute;-&Iacute;y&iacute;m&iacute;d&eacute; is the instant New York Times and IndieBound bestselling author of <em>Ace of Spades</em>.", 10.50, "2021-08-15 17:15:00");
+        Venue venue = new Venue("Edinburgh College of Art", "74 Lauriston Place\\nEdinburgh\\n", 777555765, "No", 50, 55.945378, -3.198298);
+        venueRepository.save(venue);
+
+        Event event = new Event("<p>\\n\\tFaridah &Agrave;b&iacute;k&eacute;-&Iacute;y&iacute;m&iacute;d&eacute; is the instant New York Times and IndieBound bestselling author of <em>Ace of Spades</em>.", 10.50, "2021-08-15 17:15:00", book, venue);
         eventRepository.save(event);
+
+        Event event2 = new Event("<p>\\n\\tFaridah &Agrave;b&iacute;k&eacute;-&Iacute;y&iacute;m&iacute;d&eacute; is the instant New York Times and IndieBound bestselling author of <em>Ace of Spades</em>.", 11.50, "2021-08-15 17:15:00", book2, venue);
+        eventRepository.save(event2);
 
         Customer customer = new Customer("Szymon", 798914046, "szymon@szymon.com");
         customerRepository.save(customer);

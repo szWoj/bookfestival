@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Book implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name= "title")
@@ -30,7 +30,8 @@ public class Book implements Serializable {
 
 //    @OneToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name = "event_id", nullable = false)
-//    private Event event;
+    @OneToOne(mappedBy = "book")
+    private Event event;
 
 
     public Book(String title, Author author, String genre, String photoUrl) {

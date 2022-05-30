@@ -11,7 +11,7 @@ import java.util.List;
 public class Event implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name="description")
@@ -29,12 +29,23 @@ public class Event implements Serializable {
 
 
 //    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "event")
-//    private Book book;
 
-    public Event(String description, Double price, String dateTime) {
+//    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name="book_id")
+    private Book book;
+
+    @OneToOne
+    @JoinColumn(name="venue_id")
+    private Venue venue;
+
+    public Event(String description, Double price, String dateTime, Book book, Venue venue) {
         this.description = description;
         this.price = price;
         this.dateTime = dateTime;
+        this.book = book;
+        this.venue = venue;
+
     }
 
     public Event() {
@@ -79,11 +90,20 @@ public class Event implements Serializable {
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
-    //    public Book getBook() {
-//        return book;
-//    }
-//
-//    public void setBook(Book book) {
-//        this.book = book;
-//    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Venue getVenue() {
+        return venue;
+    }
+
+    public void setVenue(Venue venue) {
+        this.venue = venue;
+    }
 }
