@@ -46,6 +46,9 @@ public class DataLoader implements ApplicationRunner {
         Book book2 = new Book("Play the Cards You're Dealt",author2, "Children","images.api.edinburghfestivalcity.com/5a/44/18/5a4418cbbf1692b496f15234efd65953d2c51870-original");
         bookRepository.save(book2);
 
+        Book book3 = new Book("Play the Cards You're Dealt",author2, "Children","images.api.edinburghfestivalcity.com/5a/44/18/5a4418cbbf1692b496f15234efd65953d2c51870-original");
+        bookRepository.save(book3);
+
         Venue venue = new Venue("Edinburgh College of Art", "74 Lauriston Place\\nEdinburgh\\n", 777555765, "No", 50, 55.945378, -3.198298);
         venueRepository.save(venue);
 
@@ -58,14 +61,23 @@ public class DataLoader implements ApplicationRunner {
         Event event2 = new Event("<p>\\n\\tFaridah &Agrave;b&iacute;k&eacute;-&Iacute;y&iacute;m&iacute;d&eacute; is the instant New York Times and IndieBound bestselling author of <em>Ace of Spades</em>.", 11.50, "2021-08-15 17:15:00", book2, venue);
         eventRepository.save(event2);
 
-        Event event3 = new Event("<p>\\n\\tFaridah &Agrave;b&iacute;k&eacute;-&Iacute;y&iacute;m&iacute;d&eacute; is the instant New York Times and IndieBound bestselling author of <em>Ace of Spades</em>.", 12.50, "2021-08-15 17:15:00", book2, venue2);
+        Event event3 = new Event("<p>\\n\\tFaridah &Agrave;b&iacute;k&eacute;-&Iacute;y&iacute;m&iacute;d&eacute; is the instant New York Times and IndieBound bestselling author of <em>Ace of Spades</em>.", 12.50, "2021-08-15 17:15:00", book3, venue2);
         eventRepository.save(event3);
 
         Customer customer = new Customer("Szymon", 798914046, "szymon@szymon.com");
         customerRepository.save(customer);
 
+        Customer customer2 = new Customer("Mike", 798914046, "mike@mike.com");
+        customerRepository.save(customer2);
+
         Booking booking = new Booking(customer, event);
         bookingRepository.save(booking);
+
+        Booking booking2 = new Booking(customer, event2);
+        bookingRepository.save(booking2);
+
+        Booking booking3 = new Booking(customer2, event);
+        bookingRepository.save(booking3);
 
 
     }
