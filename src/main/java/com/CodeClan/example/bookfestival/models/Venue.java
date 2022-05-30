@@ -1,6 +1,9 @@
 package com.CodeClan.example.bookfestival.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="venues")
@@ -31,8 +34,10 @@ public class Venue {
     @Column(name="longitude")
     private Double longitude;
 
-    @OneToOne(mappedBy = "venue")
-    private Event event;
+//    @OneToOne(mappedBy = "venue")
+    @JsonIgnoreProperties({"venue"})
+    @OneToMany(mappedBy = "venue", fetch = FetchType.LAZY)
+    private List<Event> events;
 
     public Venue(String name, String address, int phoneNumber, String disabledAccess, int capacity, Double latitude, Double longitude) {
         this.name = name;
@@ -111,11 +116,11 @@ public class Venue {
         this.longitude = longitude;
     }
 
-    public Event getEvent() {
-        return event;
+    public List<Event> getEvents() {
+        return events;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 }

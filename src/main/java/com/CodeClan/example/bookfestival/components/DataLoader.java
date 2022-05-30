@@ -49,11 +49,17 @@ public class DataLoader implements ApplicationRunner {
         Venue venue = new Venue("Edinburgh College of Art", "74 Lauriston Place\\nEdinburgh\\n", 777555765, "No", 50, 55.945378, -3.198298);
         venueRepository.save(venue);
 
+        Venue venue2 = new Venue("Edinburgh College of Art", "74 Lauriston Place\\nEdinburgh\\n", 777555765, "No", 60, 55.945378, -3.198298);
+        venueRepository.save(venue2);
+
         Event event = new Event("<p>\\n\\tFaridah &Agrave;b&iacute;k&eacute;-&Iacute;y&iacute;m&iacute;d&eacute; is the instant New York Times and IndieBound bestselling author of <em>Ace of Spades</em>.", 10.50, "2021-08-15 17:15:00", book, venue);
         eventRepository.save(event);
 
         Event event2 = new Event("<p>\\n\\tFaridah &Agrave;b&iacute;k&eacute;-&Iacute;y&iacute;m&iacute;d&eacute; is the instant New York Times and IndieBound bestselling author of <em>Ace of Spades</em>.", 11.50, "2021-08-15 17:15:00", book2, venue);
         eventRepository.save(event2);
+
+        Event event3 = new Event("<p>\\n\\tFaridah &Agrave;b&iacute;k&eacute;-&Iacute;y&iacute;m&iacute;d&eacute; is the instant New York Times and IndieBound bestselling author of <em>Ace of Spades</em>.", 12.50, "2021-08-15 17:15:00", book2, venue2);
+        eventRepository.save(event3);
 
         Customer customer = new Customer("Szymon", 798914046, "szymon@szymon.com");
         customerRepository.save(customer);
