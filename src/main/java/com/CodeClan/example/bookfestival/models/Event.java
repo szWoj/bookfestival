@@ -35,8 +35,9 @@ public class Event implements Serializable {
     @JoinColumn(name="book_id")
     private Book book;
 
-    @OneToOne
-    @JoinColumn(name="venue_id")
+    @ManyToOne
+    @JoinColumn(name="venue_id", nullable = false)
+    @JsonIgnoreProperties({"events"})
     private Venue venue;
 
     public Event(String description, Double price, String dateTime, Book book, Venue venue) {
