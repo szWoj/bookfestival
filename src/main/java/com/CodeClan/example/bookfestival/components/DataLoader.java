@@ -3,6 +3,7 @@ package com.CodeClan.example.bookfestival.components;
 import com.CodeClan.example.bookfestival.models.*;
 import com.CodeClan.example.bookfestival.repositories.*;
 import com.CodeClan.example.bookfestival.utilities.Utilities;
+import com.CodeClan.example.bookfestival.utilities.UtilitiesInt;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class DataLoader implements ApplicationRunner {
     AuthorRepository authorRepository;
 
     @Autowired
+    VenueRepository venueRepository;
+
+    @Autowired
     EventRepository eventRepository;
 
     @Autowired
@@ -35,6 +39,8 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     BookingRepository bookingRepository;
+
+
 
     URL url = new URL("https://api.edinburghfestivalcity.com/events?festival=book&year=2021&key=UJQ7TKisbTVqCDz&signature=aba911fff8bf4bd53bfbbc885808a7ccc69ce84d");
 
@@ -59,17 +65,47 @@ public class DataLoader implements ApplicationRunner {
             scanner.close();
 
             JSONArray jsonArr = new JSONArray(data);
-            List<Author> dataList;
+            List<Author> authorList;
+            List<Venue> venueList;
+            List<Event> eventList;
 
-            dataList = new ArrayList<>();
+            Author author1 = new Author("hi", "http://www.staggeringbeauty.com/");
+            authorRepository.save(author1);
+
+            Book book1 = new Book("hi", author1, "hi", "http://www.staggeringbeauty.com/");
+            bookRepository.save(book1);
+
+            authorList = new ArrayList<>();
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject jsonObj = jsonArr.getJSONObject(i);
                 Author author = new Author(Utilities.checkIfNull(jsonObj, "artist"), Utilities.checkIfNull(jsonObj, "url"));
-                dataList.add(author);
+                authorList.add(author);
             }
 
-            for (int i = 0; i < dataList.size(); i++) {
-                authorRepository.save(dataList.get(i));
+            for (int i = 0; i < authorList.size(); i++) {
+                authorRepository.save(authorList.get(i));
+            }
+
+            venueList = new ArrayList<>();
+            for (int i = 0; i < jsonArr.length(); i++) {
+                JSONObject jsonObj = jsonArr.getJSONObject(i);
+                Venue venue = new Venue(Utilities.checkIfNull(jsonObj.getJSONObject("venue"), "name"), Utilities.checkIfNull(jsonObj.getJSONObject("venue"), "address"), UtilitiesInt.checkIfNull(jsonObj.getJSONObject("venue"), "phone"),Utilities.checkIfNull(jsonObj.getJSONObject("performance_space"), "wheelchair_access"), UtilitiesInt.checkIfNull(jsonObj.getJSONObject("performance_space"), "capacity"), jsonObj.getDouble("latitude"), jsonObj.getDouble("longitude"));
+                venueList.add(venue);
+            }
+
+            for (int i = 0; i < venueList.size(); i++) {
+                venueRepository.save(venueList.get(i));
+            }
+
+            eventList = new ArrayList<>();
+            for (int i = 0; i < jsonArr.length(); i++){
+                JSONObject jsonObj = jsonArr.getJSONObject(i);
+                Event event = new Event(Utilities.checkIfNull(jsonObj, "description"),UtilitiesInt.checkIfNull(jsonObj.getJSONArray("performances").getJSONObject(0), "price"), Utilities.checkIfNull(jsonObj.getJSONArray("performances").getJSONObject(0), "start"), book1, venueList.get(i));
+                eventList.add(event);
+            }
+
+            for (int i = 0; i < eventList.size(); i++) {
+                eventRepository.save(eventList.get(i));
             }
 
         }
