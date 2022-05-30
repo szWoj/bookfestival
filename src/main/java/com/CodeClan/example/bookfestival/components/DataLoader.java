@@ -68,12 +68,8 @@ public class DataLoader implements ApplicationRunner {
             List<Author> authorList;
             List<Venue> venueList;
             List<Event> eventList;
+            List<Book> bookList;
 
-            Author author1 = new Author("hi", "http://www.staggeringbeauty.com/");
-            authorRepository.save(author1);
-
-            Book book1 = new Book("hi", author1, "hi", "http://www.staggeringbeauty.com/");
-            bookRepository.save(book1);
 
             authorList = new ArrayList<>();
             for (int i = 0; i < jsonArr.length(); i++) {
@@ -97,16 +93,29 @@ public class DataLoader implements ApplicationRunner {
                 venueRepository.save(venueList.get(i));
             }
 
+            bookList = new ArrayList<>();
+            for (int i = 0; i < jsonArr.length(); i++){
+                Book book = new Book("hi", authorList.get(i), "hi", "http://www.staggeringbeauty.com/");
+                bookList.add(book);
+            }
+
+            for (int i = 0; i < bookList.size(); i++) {
+                bookRepository.save(bookList.get(i));
+            }
+
             eventList = new ArrayList<>();
             for (int i = 0; i < jsonArr.length(); i++){
                 JSONObject jsonObj = jsonArr.getJSONObject(i);
-                Event event = new Event(Utilities.checkIfNull(jsonObj, "description"),UtilitiesInt.checkIfNull(jsonObj.getJSONArray("performances").getJSONObject(0), "price"), Utilities.checkIfNull(jsonObj.getJSONArray("performances").getJSONObject(0), "start"), book1, venueList.get(i));
+                Event event = new Event(Utilities.checkIfNull(jsonObj, "description"),UtilitiesInt.checkIfNull(jsonObj.getJSONArray("performances").getJSONObject(0), "price"), Utilities.checkIfNull(jsonObj.getJSONArray("performances").getJSONObject(0), "start"), bookList.get(i), venueList.get(i));
                 eventList.add(event);
             }
 
             for (int i = 0; i < eventList.size(); i++) {
                 eventRepository.save(eventList.get(i));
             }
+
+
+
 
         }
 

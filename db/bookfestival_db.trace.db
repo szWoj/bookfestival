@@ -861,3 +861,9 @@ SELECT* FROM ID [42102-212]
 2022-05-30 15:15:06 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]GENRE"; expected "GRANT"; SQL statement:
 GENRE [42001-212]
+2022-05-30 15:28:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKS1" not found; SQL statement:
+SELECT * FROM books1 [42102-212]
+2022-05-30 15:28:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]1"; SQL statement:
+1 [42000-212]
