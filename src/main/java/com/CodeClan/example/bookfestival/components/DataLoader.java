@@ -41,7 +41,6 @@ public class DataLoader implements ApplicationRunner {
     BookingRepository bookingRepository;
 
 
-
     URL url = new URL("https://api.edinburghfestivalcity.com/events?festival=book&year=2021&key=UJQ7TKisbTVqCDz&signature=aba911fff8bf4bd53bfbbc885808a7ccc69ce84d");
 
     public DataLoader() throws MalformedURLException {}
