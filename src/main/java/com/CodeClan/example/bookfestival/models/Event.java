@@ -14,11 +14,12 @@ public class Event implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Lob
     @Column(name="description")
     private String description;
 
     @Column(name="price")
-    private Double price;
+    private int price;
 
     @Column(name="dateTime")
     private String dateTime;
@@ -40,7 +41,7 @@ public class Event implements Serializable {
     @JsonIgnoreProperties({"events"})
     private Venue venue;
 
-    public Event(String description, Double price, String dateTime, Book book, Venue venue) {
+    public Event(String description, int price, String dateTime, Book book, Venue venue) {
         this.description = description;
         this.price = price;
         this.dateTime = dateTime;
@@ -68,11 +69,11 @@ public class Event implements Serializable {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
