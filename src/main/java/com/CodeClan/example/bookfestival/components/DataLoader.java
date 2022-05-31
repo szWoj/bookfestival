@@ -75,8 +75,17 @@ public class DataLoader implements ApplicationRunner {
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject jsonObj = jsonArr.getJSONObject(i);
                 if (i == 15){
-                    Author author1 = new Author("Nick Bryant", Utilities.checkIfNull(jsonObj, "url"));
+                    Author author1 = new Author("Willy Vlautin", Utilities.checkIfNull(jsonObj, "url"));
                     authorList.add(author1);
+                } else if (i == 16){
+                    Author author5 = new Author("Nick Bryant", Utilities.checkIfNull(jsonObj, "url"));
+                    authorList.add(author5);
+                } else if (i == 7){
+                    Author author2 = new Author("Katie Kitamura", Utilities.checkIfNull(jsonObj, "url"));
+                    authorList.add(author2);
+                } else if (i == 8){
+                    Author author3 = new Author("Salman Rushdie", Utilities.checkIfNull(jsonObj, "url"));
+                    authorList.add(author3);
                 } else {
                     Author author = new Author(Utilities.checkIfNull(jsonObj, "artist"), Utilities.checkIfNull(jsonObj, "url"));
                     authorList.add(author);
@@ -132,7 +141,7 @@ public class DataLoader implements ApplicationRunner {
             bookList.add(book8);
             bookRepository.save(book8);
 
-            Book book9 = new Book("Languages of Truth", authorList.get(9), Utilities.checkIfNull(jsonArr.getJSONObject(8), "genre"), "https://cdn.waterstones.com/bookjackets/large/9781/7873/9781787331938.jpg");
+            Book book9 = new Book("Languages of Truth", authorList.get(8), Utilities.checkIfNull(jsonArr.getJSONObject(8), "genre"), "https://cdn.waterstones.com/bookjackets/large/9781/7873/9781787331938.jpg");
             bookList.add(book9);
             bookRepository.save(book9);
 
@@ -210,17 +219,6 @@ public class DataLoader implements ApplicationRunner {
             bookList.add(book28);
             bookRepository.save(book28);
 
-
-
-
-//            for (int i = 0; i < jsonArr.length(); i++){
-//                Book book = new Book("hi", authorList.get(i), "hi", "http://www.staggeringbeauty.com/");
-//                bookList.add(book);
-//            }
-//
-//            for (int i = 0; i < bookList.size(); i++) {
-//                bookRepository.save(bookList.get(i));
-//            }
 
             eventList = new ArrayList<>();
             for (int i = 0; i < jsonArr.length(); i++){
